@@ -19,13 +19,13 @@ $(document).ready(function() {
 	// A: rock (1)			Y: paper(2)
 	// B: paper (2)			X: rock (1)
 	// C: scissors (3)		Z: scissors (3)
-	// win: +6
-	// loss: +0
-	// draw: +3
 	// rock defeats scissors
 	// scissors defeats paper
 	// paper defeats rock
-
+	// X means you need to lose
+	// Y means you need to end the round in a draw
+	// Z means you need to win
+	
 	var roundLength = $("pre").text().split("\n").length
 	var firstPlayerScore = 0
 	var secondPlayerScore = 0
@@ -36,16 +36,16 @@ $(document).ready(function() {
 		var secondPlayer = $("pre").text().split("\n")[i].split(" ")[1]
 		if (firstPlayer == "A") {
 			if (secondPlayer == "Y") {
-				firstPlayerScore = firstPlayerScore + 1
-				secondPlayerScore = secondPlayerScore + 8
-			}
-			else if (secondPlayer == "X") {
 				firstPlayerScore = firstPlayerScore + 4
 				secondPlayerScore = secondPlayerScore + 4
 			}
-			else if (secondPlayer == "Z") {
-				firstPlayerScore = firstPlayerScore + 7
+			else if (secondPlayer == "X") {
+				firstPlayerScore = firstPlayerScore + 9
 				secondPlayerScore = secondPlayerScore + 3
+			}
+			else if (secondPlayer == "Z") {
+				firstPlayerScore = firstPlayerScore + 1
+				secondPlayerScore = secondPlayerScore + 8
 			}
 		}
 		else if (firstPlayer == "B") {
@@ -58,22 +58,22 @@ $(document).ready(function() {
 				secondPlayerScore = secondPlayerScore + 1
 			}
 			else if (secondPlayer == "Z") {
-				firstPlayerScore = firstPlayerScore + 1
+				firstPlayerScore = firstPlayerScore + 2
 				secondPlayerScore = secondPlayerScore + 9
 			}
 		}
 		else if (firstPlayer == "C") {
 			if (secondPlayer == "Y") {
+				firstPlayerScore = firstPlayerScore + 6
+				secondPlayerScore = secondPlayerScore + 6
+			}
+			else if (secondPlayer == "X") {
 				firstPlayerScore = firstPlayerScore + 9
 				secondPlayerScore = secondPlayerScore + 2
 			}
-			else if (secondPlayer == "X") {
+			else if (secondPlayer == "Z") {
 				firstPlayerScore = firstPlayerScore + 3
 				secondPlayerScore = secondPlayerScore + 7
-			}
-			else if (secondPlayer == "Z") {
-				firstPlayerScore = firstPlayerScore + 6
-				secondPlayerScore = secondPlayerScore + 6
 			}
 		}
 		console.log("scores finaux : " + firstPlayerScore + "/" + secondPlayerScore)
