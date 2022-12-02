@@ -1,0 +1,96 @@
+<html>
+<style>
+body {font-family: sans-serif;}
+ul { list-style-type: none; }
+pre, div { 	box-sizing: border-box; margin: 10px; border: 1px solid #ccc; background-color: #efefef; vertical-align: top; padding: 2em;}
+pre { font-family: monospace;}
+</style>
+<body>
+<pre>1000
+2000
+3000
+
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	var groupsLength = $("pre").text().split("\n\n").length
+	var groups = []
+	var maxCals1 = 0
+	var maxCals2 = 0
+	var maxCals3 = 0
+	var maxCalsGroup1 = 0
+	var maxCalsGroup2 = 0
+	var maxCalsGroup3 = 0
+
+	for (var i=0; i<groupsLength; i++) {
+		var linesInGroup = $("pre").text().split("\n\n")[i].split("\n").length
+		var groupSum = 0
+
+		for (var j=0; j<linesInGroup; j++) {
+			groupSum = groupSum + parseInt($("pre").text().split("\n\n")[i].split("\n")[j])
+
+			if (groupSum > maxCals1) {
+				maxCals1 = groupSum
+				maxCalsGroup1 = i
+			}
+		}
+		console.log(i + " - " + linesInGroup + " - " + groupSum)
+	}
+
+	for (var i=0; i<groupsLength; i++) {
+		if (i != maxCalsGroup1) {
+			var linesInGroup = $("pre").text().split("\n\n")[i].split("\n").length
+			var groupSum = 0
+
+			for (var j=0; j<linesInGroup; j++) {
+				groupSum = groupSum + parseInt($("pre").text().split("\n\n")[i].split("\n")[j])
+
+				if (groupSum > maxCals2) {
+					maxCals2 = groupSum
+					maxCalsGroup2 = i
+				}
+			}
+		}
+	}
+
+	for (var i=0; i<groupsLength; i++) {
+		if (i != maxCalsGroup1 && i != maxCalsGroup2) {
+			var linesInGroup = $("pre").text().split("\n\n")[i].split("\n").length
+			var groupSum = 0
+
+			for (var j=0; j<linesInGroup; j++) {
+				groupSum = groupSum + parseInt($("pre").text().split("\n\n")[i].split("\n")[j])
+
+				if (groupSum > maxCals3) {
+					maxCals3 = groupSum
+					maxCalsGroup3 = i
+				}
+			}
+		}
+	}
+
+	console.log("Top 1 : " + maxCals1 + " (group " + maxCalsGroup1 +")")
+	console.log("Top 2 : " + maxCals2 + " (group " + maxCalsGroup2 +")")
+	console.log("Top 3 : " + maxCals3 + " (group " + maxCalsGroup3 +")")
+
+	console.log("Total cals = " + parseInt(maxCals1 + maxCals2 + maxCals3))
+	
+
+});
+</script>
+</body>
+</html>
