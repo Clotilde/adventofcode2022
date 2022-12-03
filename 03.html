@@ -1,0 +1,65 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	// Lowercase item types a through z have priorities 1 through 26.
+	// Uppercase item types A through Z have priorities 27 through 52.
+
+	var priorityRule = {
+		'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26, 'A': 27, 'B': 28, 'C': 29, 'D': 30, 'E': 31, 'F': 32, 'G': 33, 'H': 34, 'I': 35, 'J': 36, 'K': 37, 'L': 38, 'M': 39, 'N': 40, 'O': 41, 'P': 42, 'Q': 43, 'R': 44, 'S': 45, 'T': 46, 'U': 47, 'V': 48, 'W': 49, 'X': 50, 'Y': 51, 'Z': 52 
+	}
+	
+	var rucksacksLength = $("pre").text().split("\n").length
+	var priority = 0
+	console.log("There are " + rucksacksLength + " rucksacks")
+
+	for (var i=0; i<rucksacksLength; i++) { // loop on each rucksack
+		var thisRucksackLength = $("pre").text().split("\n")[i].split("").length
+		var firstHalf = []
+		var secondHalf = []
+		var modulo = ""
+		for (var j=0; j<thisRucksackLength/2; j++) {
+			firstHalf = firstHalf + $("pre").text().split("\n")[i].split("")[j]
+		}
+		for (var k=thisRucksackLength/2; k<thisRucksackLength; k++) {
+			secondHalf = secondHalf + $("pre").text().split("\n")[i].split("")[k]
+		}
+
+		for (var l=0; l<firstHalf.split("").length; l++) {
+			var item = firstHalf.split("")[l]
+			if (secondHalf.includes(item)) {
+				modulo = item
+			}
+		}
+
+		for (var m=0; m<secondHalf.split("").length; m++) {
+			var item = secondHalf.split("")[m]
+			if (firstHalf.includes(item)) {
+				modulo = item
+			}
+		}
+		console.log("   Rucksack #" + i + " - Shared item: " + modulo + " - Priority: " + priorityRule[modulo])
+		priority = priority + priorityRule[modulo] 
+	}
+	console.log(priority)
+	
+	
+
+});
+</script>
+</body>
+</html>
