@@ -1,0 +1,84 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	var priorityRule = {
+		'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26, 'A': 27, 'B': 28, 'C': 29, 'D': 30, 'E': 31, 'F': 32, 'G': 33, 'H': 34, 'I': 35, 'J': 36, 'K': 37, 'L': 38, 'M': 39, 'N': 40, 'O': 41, 'P': 42, 'Q': 43, 'R': 44, 'S': 45, 'T': 46, 'U': 47, 'V': 48, 'W': 49, 'X': 50, 'Y': 51, 'Z': 52 
+	}
+	
+	var rucksacksLength = $("pre").text().split("\n").length
+	var priority = 0
+	var groups = []
+
+	var i=0
+	while (i < rucksacksLength) {
+		var elf1 = $("pre").text().split("\n")[i]
+		var elf2 = $("pre").text().split("\n")[i+1]
+		var elf3 = $("pre").text().split("\n")[i+2]
+		groups.push([elf1, elf2, elf3])
+		i = i+3
+	}
+
+	for (j=0; j<groups.length; j++) {
+		var firstRuckSack = []
+		var secondRuckSack = []
+		var thirdRuckSack = []
+		var common = ""
+
+		for (var k=0; k<groups[j][0].length; k++) {
+			var item = groups[j][0][k]
+			firstRuckSack = firstRuckSack + item
+		}
+		for (var l=0; l<groups[j][1].length; l++) {
+			var item = groups[j][1][l]
+			secondRuckSack = secondRuckSack + item
+		}
+		for (var m=0; m<groups[j][2].length; m++) {
+			var item = groups[j][2][m]
+			thirdRuckSack = thirdRuckSack + item
+		}
+		for (var n=0; n<firstRuckSack.length; n++) {
+			var item = firstRuckSack[n]
+			if (secondRuckSack.includes(item) && thirdRuckSack.includes(item)) {
+				common = item
+			}
+		}
+		for (var o=0; o<secondRuckSack.length; o++) {
+			var item = secondRuckSack[o]
+			if (firstRuckSack.includes(item) && thirdRuckSack.includes(item)) {
+				common = item
+			}
+		}
+		for (var p=0; p<secondRuckSack.length; p++) {
+			var item = thirdRuckSack[p]
+			if (firstRuckSack.includes(item) && secondRuckSack.includes(item)) {
+				common = item
+			}
+		}
+		priority = priority + priorityRule[common]
+	
+	}
+	console.log(priority)
+
+
+	
+	
+
+});
+</script>
+</body>
+</html>
