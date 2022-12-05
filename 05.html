@@ -1,0 +1,61 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {	
+	// transform columns into rows
+	// levels nb
+	var levels = $("pre").text().split("\n\n")[0].split("\n").length - 1
+	// stacks nb
+	var stacks = $("pre").text().split("\n\n")[0].split("\n")[levels].split("   ").length
+	var cargoPlan = []
+
+	console.log("levels: " + levels + " - stacks: " + stacks)
+	console.log("—————")
+
+	// get each stack content
+	// first crate: signs 0, 1 & 2 of each level
+	// second crate: signs 4, 5 & 6 of each level
+	// third crate: signs 8, 9 & 10 of each level
+	// etc. until last crate : signs stacks*3-1+2
+
+	console.log("Stack 1")
+	console.log("     Crate 1: " + $("pre").text().split("\n\n")[0].split("\n")[2][0] + $("pre").text().split("\n\n")[0].split("\n")[2][1] + $("pre").text().split("\n\n")[0].split("\n")[2][2])
+	console.log("     Crate 2: " + $("pre").text().split("\n\n")[0].split("\n")[1][0] + $("pre").text().split("\n\n")[0].split("\n")[1][1] + $("pre").text().split("\n\n")[0].split("\n")[1][2])
+	console.log("     Crate 3: " + $("pre").text().split("\n\n")[0].split("\n")[0][0] + $("pre").text().split("\n\n")[0].split("\n")[0][1] + $("pre").text().split("\n\n")[0].split("\n")[0][2])
+	console.log("—————")
+	console.log("Stack 2")
+	console.log("     Crate 1: " + $("pre").text().split("\n\n")[0].split("\n")[2][4] + $("pre").text().split("\n\n")[0].split("\n")[2][5] + $("pre").text().split("\n\n")[0].split("\n")[2][6])
+	console.log("     Crate 2: " + $("pre").text().split("\n\n")[0].split("\n")[1][4] + $("pre").text().split("\n\n")[0].split("\n")[1][5] + $("pre").text().split("\n\n")[0].split("\n")[1][6])
+	console.log("     Crate 3: " + $("pre").text().split("\n\n")[0].split("\n")[0][4] + $("pre").text().split("\n\n")[0].split("\n")[0][5] + $("pre").text().split("\n\n")[0].split("\n")[0][6])
+	console.log("Stack 3")
+	console.log("     Crate 1: " + $("pre").text().split("\n\n")[0].split("\n")[2][8] + $("pre").text().split("\n\n")[0].split("\n")[2][9] + $("pre").text().split("\n\n")[0].split("\n")[2][10])
+	console.log("     Crate 2: " + $("pre").text().split("\n\n")[0].split("\n")[1][8] + $("pre").text().split("\n\n")[0].split("\n")[1][9] + $("pre").text().split("\n\n")[0].split("\n")[1][10])
+	console.log("     Crate 3: " + $("pre").text().split("\n\n")[0].split("\n")[0][8] + $("pre").text().split("\n\n")[0].split("\n")[0][9] + $("pre").text().split("\n\n")[0].split("\n")[0][10])
+
+
+	//console.log("—————————————————")
+	//console.log("Result: " )
+	//console.log("—————————————————")
+
+});
+
+</script>
+</body>
+</html>
