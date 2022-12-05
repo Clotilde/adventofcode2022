@@ -45,33 +45,10 @@ $(document).ready(function() {
 			secondElfAllSections.push(section)
 		}
 
-		console.log(firstElfAllSections + " - " + secondElfAllSections)
-		console.log("     1-first = " + firstElfAllSections[0])
-		console.log("     1-last = " + firstElfAllSections[firstElftSectionsLength-1])
-		console.log("     2-first = " + secondElfAllSections[0])
-		console.log("     2-last = " + secondElfAllSections[secondElftSectionsLength-1])
+		if (firstElfAllSections[0] >= secondElfAllSections[0] && firstElfAllSections[firstElftSectionsLength-1] <= secondElfAllSections[secondElftSectionsLength-1] || secondElfAllSections[0] >= firstElfAllSections[0] && secondElfAllSections[secondElftSectionsLength-1] <= firstElfAllSections[firstElftSectionsLength-1]) {
+				selfContainedPair = selfContainedPair + 1
+			}
 
-
-
-		// var rangeFirstIncludedInSecond = 0
-		// for (var d=0; d<firstElftSectionsLength; d++) {
-		// 	if (secondElfAllSections.includes(firstElfAllSections[d])) {
-		// 		rangeFirstIncludedInSecond = rangeFirstIncludedInSecond + 1
-		// 	}
-		// 	if (rangeFirstIncludedInSecond == firstElftSectionsLength) {
-		// 		selfContainedPair = selfContainedPair + 1
-		// 	}
-		// }
-
-		// var rangeSecondIncludedInFirst = 0
-		// for (var e=0; e<secondElftSectionsLength; e++) {
-		// 	if (firstElfAllSections.includes(secondElfAllSections[e])) {
-		// 		rangeSecondIncludedInFirst = rangeSecondIncludedInFirst + 1
-		// 	}
-		// 	if (rangeSecondIncludedInFirst == secondElftSectionsLength) {
-		// 		selfContainedPair = selfContainedPair + 1
-		// 	}
-		// }
 	}
 
 	console.log("Self contained Pair: " + selfContainedPair)
