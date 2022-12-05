@@ -1,0 +1,70 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>2-4,6-8
+2-3,4-5
+5-7,7-9
+2-8,3-7
+6-6,4-6
+2-6,4-8</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {	
+	var pairLength = $("pre").text().split("\n").length
+	var pairs = []
+	var overlap = 0
+
+	for (var a=0; a<pairLength; a++) {
+		var pair = $("pre").text().split("\n")[a]
+
+		var firstElf = pair.split(",")[0]
+		var firstElfLowest = firstElf.split("-")[0]
+		var firstElfHighest = firstElf.split("-")[1]
+		var firstElftSectionsLength = firstElfHighest - firstElfLowest + 1
+		var firstElfAllSections = []
+
+		for (var b=0; b<firstElftSectionsLength; b++) {
+			var section = parseInt(firstElfLowest) + b
+			firstElfAllSections.push(section)
+		}
+
+		var secondElf = pair.split(",")[1]
+		var secondElfLowest = secondElf.split("-")[0]
+		var secondElfHighest = secondElf.split("-")[1]
+		var secondElftSectionsLength = secondElfHighest - secondElfLowest + 1
+		var secondElfAllSections = []
+
+		for (var c=0; c<secondElftSectionsLength; c++) {
+			var section = parseInt(secondElfLowest) + c
+			secondElfAllSections.push(section)
+		}
+
+		for (var d=0; d<firstElftSectionsLength; d++) {
+			console.log(firstElfAllSections + " - " + secondElfAllSections)
+			var section = firstElfAllSections[d]
+			if (secondElfAllSections.includes(section)) {
+				console.log("     → in this group, both elves cover at least one section (" + section +")")
+				overlap = overlap + 1
+				break;
+			}
+		}
+
+
+
+	}
+	console.log("—————————————————")
+	console.log("Overlap: " + overlap)
+	console.log("—————————————————")
+
+});
+
+// first attempt: 611 (too high)
+</script>
+</body>
+</html>
