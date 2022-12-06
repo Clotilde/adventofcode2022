@@ -1,0 +1,74 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>    [D]
+[N] [C]
+[Z] [M] [P]
+ 1   2   3
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	var rows = $("pre").text().split("\n\n")[0].split("\n").length -1 // last line of the part before the "\n\n" is just stacks numbers
+	var stacks = $("pre").text().split("\n\n")[0].split("\n")[rows].trim(" ").split("").pop() // remove spaces at the end, take the last number
+	var cargoMap = []
+
+	for (var c=stacks; c>=0; c--) {
+		var stack = []
+		for (var d=rows-1; d>=0; d--) {
+			var crate = $("pre").text().split("\n\n")[0].split("\n")[d].split("")[c*4]+$("pre").text().split("\n\n")[0].split("\n")[d].split("")[c*4+1]+$("pre").text().split("\n\n")[0].split("\n")[d].split("")[c*4+2]
+			if (!crate || crate == "   ") { break;}
+			stack.push(crate)
+		}
+		cargoMap.splice(0, 0, stack)
+	}
+
+	var instructionsNb = $("pre").text().split("\n\n")[1].split("\n").length
+	var instructions = []
+
+	for (var a=0; a<instructionsNb; a++) {
+		var quantity = $("pre").text().split("\n\n")[1].split("\n")[a].split(" ")[1]
+		var origin = $("pre").text().split("\n\n")[1].split("\n")[a].split(" ")[3]
+		var target = $("pre").text().split("\n\n")[1].split("\n")[a].split(" ")[5]
+		instructions.push({quantity, origin, target})
+	}
+
+	for (var b=0; b<instructionsNb; b++) { // loop on each instruction
+
+		for (var c=0; c<instructions[b].quantity; c++) { // loop on quantity to move
+			var cratesInStack = cargoMap[instructions[b].origin-1].length
+			var crateToMove = cargoMap[instructions[b].origin-1][cratesInStack - instructions[b].quantity + c]
+			cargoMap[instructions[b].target-1].push(crateToMove) // crate is move to the target stack
+		}
+
+		for (var d=0; d<instructions[b].quantity; d++) {
+			cargoMap[instructions[b].origin-1].pop()
+		}
+
+	}
+
+	// get final result
+	var firstCrates = []
+	for (var e=0; e<stacks; e++) {
+		firstCrates.push(cargoMap[e].pop())
+	}
+
+	console.log("———————————————————")
+	console.log("Result: " + firstCrates)
+	console.log("———————————————————")
+
+});
+
+</script>
+</body>
+</html>
