@@ -1,0 +1,42 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>mjqjpqmgbljsphdztnvjfqwrcgsmlb</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	// the device needs to lock on to their signal.
+	// you need to add a subroutine to the device that detects a start-of-packet marker in the datastream
+	// the start of a packet is indicated by a sequence of four characters that are all different
+
+	var datastreamLength = $("pre").text().split("").length
+
+	for (var a=0; a<datastreamLength; a++) {
+		var char1 = $("pre").text().split("")[a]
+		var char2 = $("pre").text().split("")[a+1]
+		var char3 = $("pre").text().split("")[a+2]
+		var char4 = $("pre").text().split("")[a+3]
+		
+		if (char1 != char2 && char1 != char3 && char1 != char4 && char2 != char3 && char2 != char4 && char3 != char4) {
+			console.log("———————————————————")
+			console.log("Result: " + (parseInt(a)+4))
+			console.log("———————————————————")
+			break;
+		}
+
+		
+	}
+
+	
+
+});
+
+</script>
+</body>
+</html>
