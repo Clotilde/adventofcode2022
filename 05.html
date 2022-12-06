@@ -19,8 +19,8 @@ move 1 from 1 to 2</pre>
 		crossorigin="anonymous"></script>
 <script>
 $(document).ready(function() {
-	var rows = $("pre").text().split("\n\n")[0].split("\n").length -1
-	var stacks = $("pre").text().split("\n\n")[0].split("\n")[rows].split("")[$("pre").text().split("\n\n")[0].split("\n")[rows].split("").length - 1]
+	var rows = $("pre").text().split("\n\n")[0].split("\n").length -1 // last line of the part before the "\n\n" is just stacks numbers
+	var stacks = $("pre").text().split("\n\n")[0].split("\n")[rows].trim(" ").split("").pop() // remove spaces at the end, take the last number
 	var cargoMap = []
 
 	for (var c=stacks; c>=0; c--) {
