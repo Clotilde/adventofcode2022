@@ -18,14 +18,20 @@ move 1 from 1 to 2</pre>
 		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 		crossorigin="anonymous"></script>
 <script>
-$(document).ready(function() {	
-	// transform columns into rows
-	// levels nb
-	// var levels = $("pre").text().split("\n\n")[0].split("\n").length - 1
-	// stacks nb // 9 in full input
-	// var stacks = $("pre").text().split("\n\n")[0].split("\n")[levels].split("   ").length
-	var stack1 = ["coucou", "bibi", "lolo"]
-	console.log(stack1)
+$(document).ready(function() {
+	var rows = $("pre").text().split("\n\n")[0].split("\n").length -1
+	var stacks = $("pre").text().split("\n\n")[0].split("\n")[rows].split("")[$("pre").text().split("\n\n")[0].split("\n")[rows].split("").length - 1]
+	var cargoMap = []
+
+	for (var c=stacks; c>=0; c--) {
+		var stack = []
+		for (var d=rows-1; d>=0; d--) {
+			var crate = $("pre").text().split("\n\n")[0].split("\n")[d].split("")[c*4]+$("pre").text().split("\n\n")[0].split("\n")[d].split("")[c*4+1]+$("pre").text().split("\n\n")[0].split("\n")[d].split("")[c*4+2]
+			if (!crate || crate == "   ") { break;}
+			stack.push(crate)
+		}
+		cargoMap.splice(0, 0, stack)
+	}
 
 	var instructionsNb = $("pre").text().split("\n\n")[1].split("\n").length
 	var instructions = []
@@ -38,17 +44,21 @@ $(document).ready(function() {
 	}
 
 	for (var b=0; b<instructionsNb; b++) {
-		console.log("instruction " + b + " - Quantity: " +instructions[b].quantity)
-		for (var c=0; c<instructions[b].quantity; c++) { // loop on lines nb
-			console.log("    ligne " + c + ": " + $("pre").text().split("\n\n")[0].split("\n")[c])
+
+		for (var c=0; c<instructions[b].quantity; c++) { // loop on crates nb
+			cargoMap[instructions[b].target-1].push(cargoMap[instructions[b].origin-1].pop())
 		}
 	}
 
-	console.log(instructions)
+	// get final result
+	var firstCrates = []
+	for (var e=0; e<stacks; e++) {
+		firstCrates.push(cargoMap[e].pop())
+	}
 
-	//console.log("—————————————————")
-	//console.log("Result: " )
-	//console.log("—————————————————")
+	console.log("—————————————————")
+	console.log("Result: " + firstCrates)
+	console.log("—————————————————")
 
 });
 
