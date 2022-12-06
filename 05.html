@@ -21,34 +21,30 @@ move 1 from 1 to 2</pre>
 $(document).ready(function() {	
 	// transform columns into rows
 	// levels nb
-	var levels = $("pre").text().split("\n\n")[0].split("\n").length - 1
-	// stacks nb
-	var stacks = $("pre").text().split("\n\n")[0].split("\n")[levels].split("   ").length
-	var cargoPlan = []
+	// var levels = $("pre").text().split("\n\n")[0].split("\n").length - 1
+	// stacks nb // 9 in full input
+	// var stacks = $("pre").text().split("\n\n")[0].split("\n")[levels].split("   ").length
+	var stack1 = ["coucou", "bibi", "lolo"]
+	console.log(stack1)
 
-	console.log("levels: " + levels + " - stacks: " + stacks)
-	console.log("—————")
+	var instructionsNb = $("pre").text().split("\n\n")[1].split("\n").length
+	var instructions = []
 
-	// get each stack content
-	// first crate: signs 0, 1 & 2 of each level
-	// second crate: signs 4, 5 & 6 of each level
-	// third crate: signs 8, 9 & 10 of each level
-	// etc. until last crate : signs stacks*3-1+2
+	for (var a=0; a<instructionsNb; a++) {
+		var quantity = $("pre").text().split("\n\n")[1].split("\n")[a].split(" ")[1]
+		var origin = $("pre").text().split("\n\n")[1].split("\n")[a].split(" ")[3]
+		var target = $("pre").text().split("\n\n")[1].split("\n")[a].split(" ")[5]
+		instructions.push({quantity, origin, target})
+	}
 
-	console.log("Stack 1")
-	console.log("     Crate 1: " + $("pre").text().split("\n\n")[0].split("\n")[2][0] + $("pre").text().split("\n\n")[0].split("\n")[2][1] + $("pre").text().split("\n\n")[0].split("\n")[2][2])
-	console.log("     Crate 2: " + $("pre").text().split("\n\n")[0].split("\n")[1][0] + $("pre").text().split("\n\n")[0].split("\n")[1][1] + $("pre").text().split("\n\n")[0].split("\n")[1][2])
-	console.log("     Crate 3: " + $("pre").text().split("\n\n")[0].split("\n")[0][0] + $("pre").text().split("\n\n")[0].split("\n")[0][1] + $("pre").text().split("\n\n")[0].split("\n")[0][2])
-	console.log("—————")
-	console.log("Stack 2")
-	console.log("     Crate 1: " + $("pre").text().split("\n\n")[0].split("\n")[2][4] + $("pre").text().split("\n\n")[0].split("\n")[2][5] + $("pre").text().split("\n\n")[0].split("\n")[2][6])
-	console.log("     Crate 2: " + $("pre").text().split("\n\n")[0].split("\n")[1][4] + $("pre").text().split("\n\n")[0].split("\n")[1][5] + $("pre").text().split("\n\n")[0].split("\n")[1][6])
-	console.log("     Crate 3: " + $("pre").text().split("\n\n")[0].split("\n")[0][4] + $("pre").text().split("\n\n")[0].split("\n")[0][5] + $("pre").text().split("\n\n")[0].split("\n")[0][6])
-	console.log("Stack 3")
-	console.log("     Crate 1: " + $("pre").text().split("\n\n")[0].split("\n")[2][8] + $("pre").text().split("\n\n")[0].split("\n")[2][9] + $("pre").text().split("\n\n")[0].split("\n")[2][10])
-	console.log("     Crate 2: " + $("pre").text().split("\n\n")[0].split("\n")[1][8] + $("pre").text().split("\n\n")[0].split("\n")[1][9] + $("pre").text().split("\n\n")[0].split("\n")[1][10])
-	console.log("     Crate 3: " + $("pre").text().split("\n\n")[0].split("\n")[0][8] + $("pre").text().split("\n\n")[0].split("\n")[0][9] + $("pre").text().split("\n\n")[0].split("\n")[0][10])
+	for (var b=0; b<instructionsNb; b++) {
+		console.log("instruction " + b + " - Quantity: " +instructions[b].quantity)
+		for (var c=0; c<instructions[b].quantity; c++) { // loop on lines nb
+			console.log("    ligne " + c + ": " + $("pre").text().split("\n\n")[0].split("\n")[c])
+		}
+	}
 
+	console.log(instructions)
 
 	//console.log("—————————————————")
 	//console.log("Result: " )
