@@ -1,0 +1,45 @@
+<html>
+<style>
+pre { margin: 1em; border: 1px solid #ccc; background-color: #efefef; padding: 1em; font-family: monospace;}
+</style>
+<body>
+<pre>zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw</pre>
+
+
+<script	src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	// the device needs to lock on to their signal.
+	// you need to add a subroutine to the device that detects a start-of-packet marker in the datastream
+	// the start of a packet is indicated by a sequence of four characters that are all different
+
+	var datastreamLength = $("pre").text().split("").length
+
+	for (var a=0; a<datastreamLength; a++) {
+		var sequence = []
+		for (var b=0; b<14; b++) {
+			var char = $("pre").text().split("")[a+b]
+			sequence.push(char)
+		}
+		var duplicates = 0
+		var duplicatedValues = []
+		for (var c=0; c<14; c++) {
+			if (sequence.slice().sort()[c] == sequence.slice().sort()[c+1] ) {
+				duplicates = duplicates + 1
+				duplicatedValues.push(sequence.slice().sort()[c])
+			}
+		}
+		if (duplicates == 0) {
+			console.log("no duplicates in sequence "+(a+14))
+		}
+	}
+
+	
+
+});
+
+</script>
+</body>
+</html>
